@@ -33,6 +33,7 @@ public class ajoutEtModifierUser extends JFrame {
 			public void run() {
 				try {
 					ajoutEtModifierUser frame = new ajoutEtModifierUser( "");
+					frame.setLocationRelativeTo( null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,7 +51,7 @@ public class ajoutEtModifierUser extends JFrame {
 					UserDAO us = new UserDAO();
 					try {
 						User  modifUser = us.findUserByUSerName( nameUser);
-						System.out.println( modifUser.getUserName());
+						//System.out.println( modifUser.getUserName());
 						textUserName.setText( modifUser.getUserName());
 						textPassword.setText( modifUser.getPassword());
 						comboBoxDtAcces.setSelectedItem( modifUser.getAcces());
@@ -146,6 +147,7 @@ public class ajoutEtModifierUser extends JFrame {
 						setVisible( false);
 						dispose();
 						listUser lu = new listUser();
+						lu.setLocationRelativeTo( lu.getParent());
 						lu.setVisible( true);
 					} catch (SQLException ex) {
 						ex.printStackTrace();

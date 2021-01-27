@@ -32,6 +32,7 @@ public class rechercherCde extends JFrame {
 			public void run() {
 				try {
 					rechercherCde frame = new rechercherCde();
+					frame.setLocationRelativeTo( null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -101,7 +102,12 @@ public class rechercherCde extends JFrame {
 				Vector vCde = null;
 				cdeRecherche = Integer.parseInt( textNumCde.getText());
 				try {
-					vCde = cdeDAO.afficherCommandVector( cdeRecherche);
+					if (!vCde.isEmpty()) {
+						vCde = cdeDAO.afficherCommandVector( cdeRecherche);
+					}
+				} catch (NullPointerException npe) {
+					JOptionPane.showMessageDialog( null, "Le numéro de commande n'existe pas !", "Erreur de saisie", JOptionPane.WARNING_MESSAGE);
+					
 				} catch (NumberFormatException nfe) {
 					JOptionPane.showMessageDialog( null, "Le numéro de commande saisie est erroné !", "Erreur de saisie", JOptionPane.WARNING_MESSAGE);
 					nfe.printStackTrace();

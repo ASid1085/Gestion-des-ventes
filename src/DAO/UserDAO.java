@@ -4,6 +4,7 @@ package DAO;
 import java.sql.*;
 import java.util.*;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import ConnexionBDD.connexion;
@@ -160,6 +161,7 @@ import interfaceGraphique.gestionVte;
 		}
 
 		public void connectionCompte(String userName, String mdp) {
+			
 			// Test que les 2 champs soient saisies.
 			if ( userName.equals( "") || mdp.equals( "")) {
 				JOptionPane.showMessageDialog(null, "Merci de saisir les deux champs !", "Erreur de saisie", JOptionPane.WARNING_MESSAGE);
@@ -184,11 +186,13 @@ import interfaceGraphique.gestionVte;
 			// Test le type d'accès pour donner accès au bonnes fenêtres
 			if ( dtAcces.equals( "admin")) {
 				choixAdmin ca = new choixAdmin();
+				ca.setLocationRelativeTo( ca.getParent());
 				ca.setVisible( true);
 			} 
 			
 			if ( dtAcces.equals( "employé")) {
 				gestionVte gv = new gestionVte( dtAcces);
+				gv.setLocationRelativeTo( gv.getParent());
 				gv.setVisible( true);
 			}
 		}

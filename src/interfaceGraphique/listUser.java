@@ -26,11 +26,12 @@ public class listUser extends JFrame {
 	private JButton supprimer;
 	private JButton modifier;
 	private JTable table;
+	private JButton deconnexion;
 	
 	
 	private DefaultTableModel listDesUsers() {
 		Vector nomColonne = new Vector();
-		nomColonne.add( "n° d'id");
+		nomColonne.add( "n° id");
 		nomColonne.add( "User Name");
 		nomColonne.add( "Mot de passe");
 		nomColonne.add( "Droit d'accès");
@@ -53,6 +54,7 @@ public class listUser extends JFrame {
 			public void run() {
 				try {
 					listUser frame = new listUser();
+					frame.setLocationRelativeTo( null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -68,7 +70,7 @@ public class listUser extends JFrame {
 		
 		
 		setTitle("Liste des utilisateurs");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 550, 450);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -110,23 +112,23 @@ public class listUser extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				ajoutEtModifierUser au = new ajoutEtModifierUser( "");
 				au.setVisible( true);
-				
+				au.setLocationRelativeTo( au.getParent());
 				//setVisible( false);
 				//dispose();
 			}
 		});
 		ajouter.setFont(new Font("Cochin", Font.PLAIN, 18));
 		ajouter.setBackground(new Color(248, 248, 255));
-		ajouter.setBounds(54, 368, 115, 46);
+		ajouter.setBounds(19, 368, 115, 46);
 		contentPane.add(ajouter);
 		
 		supprimer = new JButton("Supprimer");
 		supprimer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UserDAO us = new UserDAO();
-				String nameSelect = (String) listDesUsers().getValueAt( table.getSelectedRow(), table.getSelectedColumn());
+				String nameSelect = (String) listDesUsers().getValueAt( table.getSelectedRow(), 1);
 				try {
-					us.supprimerUserByUserName( nameSelect, JOptionPane.showInputDialog( "Saisir le mdp pour confirmer"));
+					us.supprimerUserByUserName( nameSelect, JOptionPane.showInputDialog( "Saisir le mdp pour confirmer la supression"));
 					JOptionPane.showMessageDialog( null, "L'utilisateur a bien été supprimé !", "Confirmation de suppression", JOptionPane.INFORMATION_MESSAGE);
 					table.setModel( listDesUsers());
 				} catch (SQLException ex) {
@@ -136,21 +138,40 @@ public class listUser extends JFrame {
 			}
 		});
 		supprimer.setFont(new Font("Cochin", Font.PLAIN, 18));
-		supprimer.setBounds(384, 368, 115, 46);
+		supprimer.setBounds(331, 368, 115, 46);
 		contentPane.add(supprimer);
 		
 		modifier = new JButton("Modifier");
 		modifier.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String nameSelect = (String) listDesUsers().getValueAt( table.getSelectedRow(), table.getSelectedColumn());
-				ajoutEtModifierUser au = new ajoutEtModifierUser( nameSelect);
-				au.setVisible( true);
-				setVisible( false);
-				dispose();
+				
+				String nameSelect = "";
+				try {
+					nameSelect = (String) listDesUsers().getValueAt( table.getSelectedRow(), 1);
+					//System.out.println( nameSelect);
+					ajoutEtModifierUser au = new ajoutEtModifierUser( nameSelect);
+					au.setLocationRelativeTo( au.getParent());
+					au.setVisible( true);
+					setVisible( false);
+					dispose();
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog( null, "Merci de selectionné un utilisateur !", "Erreur de sélection", JOptionPane.WARNING_MESSAGE);
+				}
 			}
 		});
 		modifier.setFont(new Font("Cochin", Font.PLAIN, 18));
-		modifier.setBounds(217, 368, 115, 46);
+		modifier.setBounds(174, 368, 115, 46);
 		contentPane.add(modifier);
+		
+		deconnexion = new JButton("");
+		deconnexion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				connexion.closeInstance();
+				System.exit(DISPOSE_ON_CLOSE);
+			}
+		});
+		deconnexion.setIcon(new ImageIcon("/Users/a.sid/Drive/Sid/04 - Formation/AFPA - CDA/Eclipse/gestionVentev2/Icon/logout24px.png"));
+		deconnexion.setBounds(478, 368, 53, 47);
+		contentPane.add(deconnexion);
 	}
 }

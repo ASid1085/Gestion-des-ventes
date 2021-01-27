@@ -79,7 +79,7 @@ public class login extends JDialog {
 					dispose();
 				}
 			});
-			okButton.setBounds(83, 152, 100, 29);
+			okButton.setBounds(68, 139, 115, 42);
 			contentPanel.add(okButton);
 			okButton.setActionCommand("OK");
 			getRootPane().setDefaultButton(okButton);
@@ -93,7 +93,7 @@ public class login extends JDialog {
 					passwordField.setText( "");
 				}
 			});
-			cancelButton.setBounds(256, 152, 100, 29);
+			cancelButton.setBounds(241, 139, 115, 42);
 			contentPanel.add(cancelButton);
 			cancelButton.setActionCommand("Cancel");
 		

@@ -11,6 +11,7 @@ import java.util.Date;
 import javax.swing.*;
 import javax.swing.border.*;
 
+import ConnexionBDD.connexion;
 import DAO.CommandDAO;
 import DAO.CommandLineDAO;
 import DAO.ProductDAO;
@@ -36,9 +37,9 @@ public class gestionVte extends JFrame {
 	private int totalQte;
 	private float fMonTTC;
 	private float totalTTC;
-	private DefaultListModel<String> modelAchat = new DefaultListModel<String>();
-	private DefaultListModel<String> modelMontant = new DefaultListModel<String>();
-	private DefaultListModel<Integer> modelQte = new DefaultListModel<Integer>();
+	private static DefaultListModel<String> modelAchat = new DefaultListModel<String>();
+	private static DefaultListModel<String> modelMontant = new DefaultListModel<String>();
+	private static DefaultListModel<Integer> modelQte = new DefaultListModel<Integer>();
 
 	
 	public DefaultComboBoxModel<String> initModelProduit() {
@@ -63,6 +64,7 @@ public class gestionVte extends JFrame {
 			public void run() {
 				try {
 					gestionVte frame = new gestionVte( "");
+					frame.setLocationRelativeTo( null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -76,7 +78,7 @@ public class gestionVte extends JFrame {
 	 */
 	public gestionVte( String dtAcces) {
 		setTitle("Gestion des ventes");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 874, 499);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -273,7 +275,7 @@ public class gestionVte extends JFrame {
 		});
 		ajouter.setFont(new Font("Cochin", Font.PLAIN, 18));
 		ajouter.setBackground(new Color(248, 248, 255));
-		ajouter.setBounds(52, 6, 115, 46);
+		ajouter.setBounds(21, 6, 115, 46);
 		panBouton.add(ajouter);
 		
 		JButton supprimer = new JButton("Supprimer");
@@ -302,7 +304,7 @@ public class gestionVte extends JFrame {
 			}
 		});
 		supprimer.setFont(new Font("Cochin", Font.PLAIN, 18));
-		supprimer.setBounds(201, 6, 115, 46);
+		supprimer.setBounds(171, 6, 115, 46);
 		panBouton.add(supprimer);
 		
 		JButton effacer = new JButton("Effacer");
@@ -323,7 +325,7 @@ public class gestionVte extends JFrame {
 			}
 		});
 		effacer.setFont(new Font("Cochin", Font.PLAIN, 18));
-		effacer.setBounds(361, 6, 115, 46);
+		effacer.setBounds(327, 6, 115, 46);
 		panBouton.add(effacer);
 		
 		JButton rechercher = new JButton("Rechercher");
@@ -334,7 +336,7 @@ public class gestionVte extends JFrame {
 			}
 		});
 		rechercher.setFont(new Font("Cochin", Font.PLAIN, 18));
-		rechercher.setBounds(523, 6, 115, 46);
+		rechercher.setBounds(484, 6, 115, 46);
 		panBouton.add(rechercher);
 		
 		JButton valider = new JButton("Valider");
@@ -385,8 +387,19 @@ public class gestionVte extends JFrame {
 			}
 		});
 		valider.setFont(new Font("Cochin", Font.PLAIN, 18));
-		valider.setBounds(685, 6, 115, 46);
+		valider.setBounds(645, 6, 115, 46);
 		panBouton.add(valider);
+		
+		JButton deconnexion = new JButton("");
+		deconnexion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				connexion.closeInstance();
+				System.exit(DISPOSE_ON_CLOSE);
+			}
+		});
+		deconnexion.setIcon(new ImageIcon("/Users/a.sid/Drive/Sid/04 - Formation/AFPA - CDA/Eclipse/gestionVentev2/Icon/logout24px.png"));
+		deconnexion.setBounds(795, 6, 53, 47);
+		panBouton.add(deconnexion);
 		
 		
 	}

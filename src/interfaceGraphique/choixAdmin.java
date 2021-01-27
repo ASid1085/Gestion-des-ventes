@@ -3,12 +3,17 @@ package interfaceGraphique;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
+
+import ConnexionBDD.connexion;
+
 import java.awt.event.*;
 import java.awt.*;
 
 public class choixAdmin extends JFrame {
 
 	private JPanel contentPane;
+	private static listUser li;
+	private static gestionVte gv;
 
 	/**
 	 * Launch the application.
@@ -18,6 +23,7 @@ public class choixAdmin extends JFrame {
 			public void run() {
 				try {
 					choixAdmin frame = new choixAdmin();
+					frame.setLocationRelativeTo( null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -31,7 +37,7 @@ public class choixAdmin extends JFrame {
 	 */
 	public choixAdmin() {
 		setTitle("Console administrateur");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 344, 367);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -46,31 +52,44 @@ public class choixAdmin extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JButton btnNewUser = new JButton("Gestion d'utilisateur");
-		btnNewUser.setBounds(25, 156, 246, 47);
-		panel.add(btnNewUser);
-		btnNewUser.setFont(new Font("Cochin", Font.PLAIN, 18));
-		
-		JButton btnGestionVtes = new JButton("Gestion des ventes");
-		btnGestionVtes.setBounds(25, 49, 246, 47);
-		panel.add(btnGestionVtes);
-		btnGestionVtes.setFont(new Font("Cochin", Font.PLAIN, 18));
-		btnGestionVtes.addActionListener(new ActionListener() {
+		JButton btnGestionUser = new JButton("Gestion d'utilisateur");
+		btnGestionUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				gestionVte gv = new gestionVte( "");
-				gv.setVisible( true);
-				//setVisible( false);
-				//dispose();
-			}
-		});
-		btnNewUser.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				listUser li = new listUser();
+				li = new listUser();
+				li.setLocationRelativeTo( li.getParent());
 				li.setVisible( true);
 				//setVisible( false);
 				//dispose();
 			}
 		});
+		btnGestionUser.setBounds(25, 125, 246, 47);
+		panel.add(btnGestionUser);
+		btnGestionUser.setFont(new Font("Cochin", Font.PLAIN, 18));
+		
+		JButton btnGestionVtes = new JButton("Gestion des ventes");
+		btnGestionVtes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				gv = new gestionVte( "");
+				gv.setLocationRelativeTo( gv.getParent());
+				gv.setVisible( true);
+				//setVisible( false);
+				//dispose();
+			}
+		});
+		btnGestionVtes.setBounds(25, 49, 246, 47);
+		panel.add(btnGestionVtes);
+		btnGestionVtes.setFont(new Font("Cochin", Font.PLAIN, 18));
+		
+		JButton deconnexion = new JButton("");
+		deconnexion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				connexion.closeInstance();
+				System.exit(DISPOSE_ON_CLOSE);
+			}
+		});
+		deconnexion.setIcon(new ImageIcon("/Users/a.sid/Drive/Sid/04 - Formation/AFPA - CDA/Eclipse/gestionVentev2/Icon/logout24px.png"));
+		deconnexion.setBounds(128, 203, 53, 47);
+		panel.add(deconnexion);
+		
 	}
-
 }

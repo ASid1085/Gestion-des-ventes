@@ -14,6 +14,7 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 
 public class identification {
 
@@ -52,18 +53,20 @@ public class identification {
 		identification.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		identification.getContentPane().setBackground( new Color(248, 248, 255));
 		
-		JButton btnNewButton = new JButton("S'authentifier");
-		btnNewButton.setFont(new Font("Cochin", Font.PLAIN, 18));
-		btnNewButton.setBounds(172, 221, 163, 43);
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnConnexion = new JButton("Connexion");
+		btnConnexion.setToolTipText("src image : <div>Icons made by <a href=\"https://www.flaticon.com/authors/inipagistudio\" title=\"inipagistudio\">inipagistudio</a> from <a href=\"https://www.flaticon.com/\" title=\"Flaticon\">www.flaticon.com</a></div>");
+		btnConnexion.setIcon(new ImageIcon("/Users/a.sid/Drive/Sid/04 - Formation/AFPA - CDA/Eclipse/gestionVentev2/Icon/login24px.png"));
+		btnConnexion.setFont(new Font("Cochin", Font.PLAIN, 16));
+		btnConnexion.setBounds(179, 225, 134, 43);
+		btnConnexion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				login log = new login(identification, false);
+				log.setLocationRelativeTo( log.getParent());
 				log.setVisible( true);
-				
 			}
 		});
 		identification.getContentPane().setLayout(null);
-		identification.getContentPane().add(btnNewButton);
+		identification.getContentPane().add(btnConnexion);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(54, 18, 385, 166);
